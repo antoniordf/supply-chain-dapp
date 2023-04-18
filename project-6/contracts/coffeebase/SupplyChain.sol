@@ -242,32 +242,29 @@ contract SupplyChain {
         public
         payable
         onlyOperational
-    // Call modifier to check if upc has passed previous supply chain stage
-
-    // Call modifer to check if buyer has paid enough
-
-    // Call modifer to send any excess ether back to buyer
-
+        forSale(_upc)
+        paidEnough(items[_upc].productPrice)
+        checkValue(_upc)
     {
         // Update the appropriate fields - ownerID, distributorID, itemState
+        items[_upc].ownerID = msg.sender;
+        items[_upc].distributorID = msg.sender;
+        items[_upc].itemState = State.Sold;
         // Transfer money to farmer
+        payable(items[_upc].originFarmerID).transfer(items[_upc].productPrice);
         // emit the appropriate event
+        emit Sold(_upc);
     }
 
     // Define a function 'shipItem' that allows the distributor to mark an item 'Shipped'
     // Use the above modifers to check if the item is sold
     function shipItem(
         uint _upc
-    )
-        public
-        onlyOperational
-    // Call modifier to check if upc has passed previous supply chain stage
-
-    // Call modifier to verify caller of this function
-
-    {
+    ) public onlyOperational sold(_upc) verifyCaller(items[_upc].ownerID) {
         // Update the appropriate fields
+        items[_upc].itemState = State.Shipped;
         // Emit the appropriate event
+        emit Shipped(_upc);
     }
 
     // Define a function 'receiveItem' that allows the retailer to mark an item 'Received'
