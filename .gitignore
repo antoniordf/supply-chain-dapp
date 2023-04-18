@@ -1,0 +1,15 @@
+# Ignore build artifacts
+build/
+dist/
+out/
+
+# Ignore node_modules
+node_modules/
+
+# Ignore temporary files
+*.log
+*.tmp
+*.swp
+*.bak
+.DS_Store
+Thumbs.db
