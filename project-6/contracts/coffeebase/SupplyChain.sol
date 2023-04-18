@@ -16,6 +16,9 @@ contract SupplyChain {
     // Define a public mapping 'items' that maps the UPC to an Item.
     mapping(uint => Item) items;
 
+    // Defining toggle variable to enable and disable contract
+    bool public isOperational;
+
     // Define a public mapping 'itemsHistory' that maps the UPC to an array of TxHash,
     // that track its journey through the supply chain -- to be sent from DApp.
     mapping(uint => string[]) itemsHistory;
@@ -130,6 +133,12 @@ contract SupplyChain {
         _;
     }
 
+    // Define a modifier that checks if contract is operational
+    modifier onlyOperational() {
+        require(isOperational, "Contract is not operational");
+        _;
+    }
+
     // In the constructor set 'owner' to the address that instantiated the contract
     // and set 'sku' to 1
     // and set 'upc' to 1
@@ -137,13 +146,17 @@ contract SupplyChain {
         owner = msg.sender;
         sku = 1;
         upc = 1;
+        isOperational = true;
     }
 
-    // Define a function 'kill' if required
-    function kill() public {
-        if (msg.sender == owner) {
-            selfdestruct(owner);
-        }
+    // Define a function to disable the contract if required
+    function disableContract() public onlyOwner {
+        isOperational = false;
+    }
+
+    // Define a function to enable the contract if required
+    function enableContract() public onlyOwner {
+        isOperational = true;
     }
 
     // Define a function 'harvestItem' that allows a farmer to mark an item 'Harvested'
@@ -155,7 +168,7 @@ contract SupplyChain {
         string memory _originFarmLatitude,
         string memory _originFarmLongitude,
         string memory _productNotes
-    ) public {
+    ) public onlyOperational {
         // Add the new item as part of Harvest
 
         // Increment sku
@@ -168,6 +181,7 @@ contract SupplyChain {
         uint _upc
     )
         public
+        onlyOperational
     // Call modifier to check if upc has passed previous supply chain stage
 
     // Call modifier to verify caller of this function
@@ -182,6 +196,7 @@ contract SupplyChain {
         uint _upc
     )
         public
+        onlyOperational
     // Call modifier to check if upc has passed previous supply chain stage
 
     // Call modifier to verify caller of this function
@@ -197,6 +212,7 @@ contract SupplyChain {
         uint _price
     )
         public
+        onlyOperational
     // Call modifier to check if upc has passed previous supply chain stage
 
     // Call modifier to verify caller of this function
@@ -214,6 +230,7 @@ contract SupplyChain {
     )
         public
         payable
+        onlyOperational
     // Call modifier to check if upc has passed previous supply chain stage
 
     // Call modifer to check if buyer has paid enough
@@ -232,6 +249,7 @@ contract SupplyChain {
         uint _upc
     )
         public
+        onlyOperational
     // Call modifier to check if upc has passed previous supply chain stage
 
     // Call modifier to verify caller of this function
@@ -247,6 +265,7 @@ contract SupplyChain {
         uint _upc
     )
         public
+        onlyOperational
     // Call modifier to check if upc has passed previous supply chain stage
 
     // Access Control List enforced by calling Smart Contract / DApp
@@ -261,6 +280,7 @@ contract SupplyChain {
         uint _upc
     )
         public
+        onlyOperational
     // Call modifier to check if upc has passed previous supply chain stage
 
     // Access Control List enforced by calling Smart Contract / DApp
@@ -275,6 +295,7 @@ contract SupplyChain {
     )
         public
         view
+        onlyOperational
         returns (
             uint itemSKU,
             uint itemUPC,
@@ -306,6 +327,7 @@ contract SupplyChain {
     )
         public
         view
+        onlyOperational
         returns (
             uint itemSKU,
             uint itemUPC,
