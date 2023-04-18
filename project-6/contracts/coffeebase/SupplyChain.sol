@@ -100,36 +100,43 @@ contract SupplyChain {
 
     // Define a modifier that checks if an item.state of a upc is Processed
     modifier processed(uint _upc) {
+        require(items[_upc].itemState == State.Processed);
         _;
     }
 
     // Define a modifier that checks if an item.state of a upc is Packed
     modifier packed(uint _upc) {
+        require(items[_upc].itemState == State.Packed);
         _;
     }
 
     // Define a modifier that checks if an item.state of a upc is ForSale
     modifier forSale(uint _upc) {
+        require(items[_upc].itemState == State.ForSale);
         _;
     }
 
     // Define a modifier that checks if an item.state of a upc is Sold
     modifier sold(uint _upc) {
+        require(items[_upc].itemState == State.Sold);
         _;
     }
 
     // Define a modifier that checks if an item.state of a upc is Shipped
     modifier shipped(uint _upc) {
+        require(items[_upc].itemState == State.Shipped);
         _;
     }
 
     // Define a modifier that checks if an item.state of a upc is Received
     modifier received(uint _upc) {
+        require(items[_upc].itemState == State.Received);
         _;
     }
 
     // Define a modifier that checks if an item.state of a upc is Purchased
     modifier purchased(uint _upc) {
+        require(items[_upc].itemState == State.Purchased);
         _;
     }
 
@@ -142,6 +149,7 @@ contract SupplyChain {
     // In the constructor set 'owner' to the address that instantiated the contract
     // and set 'sku' to 1
     // and set 'upc' to 1
+    // Make contract operational
     constructor() payable {
         owner = msg.sender;
         sku = 1;
@@ -170,10 +178,27 @@ contract SupplyChain {
         string memory _productNotes
     ) public onlyOperational {
         // Add the new item as part of Harvest
-
+        items[_upc] = Item({
+            sku: sku,
+            upc: _upc,
+            ownerID: _originFarmerID,
+            originFarmerID: _originFarmerID,
+            originFarmName: _originFarmName,
+            originFarmInformation: _originFarmInformation,
+            originFarmLatitude: _originFarmLatitude,
+            originFarmLongitude: _originFarmLongitude,
+            productID: sku + _upc,
+            productNotes: _productNotes,
+            productPrice: 0, // Set initial price. Can be updated later
+            itemState: defaultState,
+            distributorID: address(0),
+            retailerID: address(0),
+            consumerID: address(0)
+        });
         // Increment sku
-        sku = sku + 1;
+        sku++;
         // Emit the appropriate event
+        emit Harvested(_upc);
     }
 
     // Define a function 'processtItem' that allows a farmer to mark an item 'Processed'
