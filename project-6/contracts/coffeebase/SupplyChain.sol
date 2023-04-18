@@ -225,16 +225,12 @@ contract SupplyChain {
     function sellItem(
         uint _upc,
         uint _price
-    )
-        public
-        onlyOperational
-    // Call modifier to check if upc has passed previous supply chain stage
-
-    // Call modifier to verify caller of this function
-
-    {
+    ) public onlyOperational packed(_upc) verifyCaller(items[_upc].ownerID) {
         // Update the appropriate fields
+        items[_upc].productPrice = _price;
+        items[_upc].itemState = State.ForSale;
         // Emit the appropriate event
+        emit ForSale(_upc);
     }
 
     // Define a function 'buyItem' that allows the disributor to mark an item 'Sold'
