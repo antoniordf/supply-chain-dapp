@@ -50,9 +50,13 @@ contract("SupplyChain", function (accounts) {
 
     // Watch the emitted event Harvested()
     const event = supplyChain.Harvested();
-    await event.watch((err, res) => {
-      eventEmitted = true;
-    });
+    event
+      .on("data", (res) => {
+        eventEmitted = true;
+      })
+      .on("error", (error) => {
+        console.error("Error in event subscription:", error);
+      });
 
     // Mark an item as Harvested by calling function harvestItem()
     await supplyChain.harvestItem(
@@ -115,9 +119,13 @@ contract("SupplyChain", function (accounts) {
 
     // Watch the emitted event Processed()
     const event = supplyChain.Processed();
-    await event.watch((err, res) => {
-      eventEmitted = true;
-    });
+    event
+      .on("data", (res) => {
+        eventEmitted = true;
+      })
+      .on("error", (error) => {
+        console.error("Error in event subscription:", error);
+      });
 
     // Mark an item as Processed by calling function processtItem()
     await supplyChain.processItem(upc);
@@ -139,9 +147,13 @@ contract("SupplyChain", function (accounts) {
 
     // Watch the emitted event Packed()
     const event = supplyChain.Packed();
-    await event.watch((err, res) => {
-      eventEmitted = true;
-    });
+    event
+      .on("data", (res) => {
+        eventEmitted = true;
+      })
+      .on("error", (error) => {
+        console.error("Error in event subscription:", error);
+      });
 
     // Mark an item as Packed by calling function packItem()
     await supplyChain.packItem(upc);
@@ -163,9 +175,13 @@ contract("SupplyChain", function (accounts) {
 
     // Watch the emitted event Sold()
     const event = supplyChain.Sold();
-    await event.watch((err, res) => {
-      eventEmitted = true;
-    });
+    event
+      .on("data", (res) => {
+        eventEmitted = true;
+      })
+      .on("error", (error) => {
+        console.error("Error in event subscription:", error);
+      });
 
     // Mark an item as ForSale by calling function sellItem()
     await supplyChain.sellItem(upc);
@@ -187,9 +203,13 @@ contract("SupplyChain", function (accounts) {
 
     // Watch the emitted event Sold()
     const event = supplyChain.Sold();
-    await event.watch((err, res) => {
-      eventEmitted = true;
-    });
+    event
+      .on("data", (res) => {
+        eventEmitted = true;
+      })
+      .on("error", (error) => {
+        console.error("Error in event subscription:", error);
+      });
 
     // Mark an item as Sold by calling function buyItem()
     await supplyChain.buyItem(upc);
@@ -217,9 +237,13 @@ contract("SupplyChain", function (accounts) {
 
     // Watch the emitted event Shipped()
     const event = supplyChain.Shipped();
-    await event.watch((err, res) => {
-      eventEmitted = true;
-    });
+    event
+      .on("data", (res) => {
+        eventEmitted = true;
+      })
+      .on("error", (error) => {
+        console.error("Error in event subscription:", error);
+      });
 
     // Mark an item as Sold by calling function shipItem()
     await supplyChain.shipItem(upc);
@@ -241,9 +265,13 @@ contract("SupplyChain", function (accounts) {
 
     // Watch the emitted event Received()
     const event = supplyChain.Received();
-    await event.watch((err, res) => {
-      eventEmitted = true;
-    });
+    event
+      .on("data", (res) => {
+        eventEmitted = true;
+      })
+      .on("error", (error) => {
+        console.error("Error in event subscription:", error);
+      });
 
     // Mark an item as Sold by calling function receiveItem()
     await supplyChain.receiveItem(upc);
@@ -271,9 +299,13 @@ contract("SupplyChain", function (accounts) {
 
     // Watch the emitted event Purchased()
     const event = supplyChain.Purchased();
-    await event.watch((err, res) => {
-      eventEmitted = true;
-    });
+    event
+      .on("data", (res) => {
+        eventEmitted = true;
+      })
+      .on("error", (error) => {
+        console.error("Error in event subscription:", error);
+      });
 
     // Mark an item as Sold by calling function purchaseItem()
     await supplyChain.purchaseItem(upc);
