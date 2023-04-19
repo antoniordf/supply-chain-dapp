@@ -183,15 +183,29 @@ contract("SupplyChain", function (accounts) {
     const supplyChain = await SupplyChain.deployed();
 
     // Declare and Initialize a variable for event
+    let eventEmitted = false;
 
     // Watch the emitted event Sold()
     const event = supplyChain.Sold();
+    await event.watch((err, res) => {
+      eventEmitted = true;
+    });
 
     // Mark an item as Sold by calling function buyItem()
+    await supplyChain.buyItem();
 
     // Retrieve the just now saved item from blockchain by calling function fetchItem()
+    const resultBufferOne = await supplyChain.fetchItemBufferOne.call(upc);
+    const resultBufferTwo = await supplyChain.fetchItemBufferTwo.call(upc);
 
     // Verify the result set
+    assert.equal(
+      resultBufferOne[2],
+      distributorID,
+      "Error: Missing or Invalid ownerID"
+    );
+    assert.equal(resultBufferTwo[5], 4, "Error: Invalid item State");
+    assert.equal(eventEmitted, true, "Invalid event emitted");
   });
 
   // 6th Test
