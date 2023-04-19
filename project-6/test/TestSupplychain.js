@@ -192,7 +192,7 @@ contract("SupplyChain", function (accounts) {
     });
 
     // Mark an item as Sold by calling function buyItem()
-    await supplyChain.buyItem();
+    await supplyChain.buyItem(upc);
 
     // Retrieve the just now saved item from blockchain by calling function fetchItem()
     const resultBufferOne = await supplyChain.fetchItemBufferOne.call(upc);
@@ -222,7 +222,7 @@ contract("SupplyChain", function (accounts) {
     });
 
     // Mark an item as Sold by calling function shipItem()
-    await supplyChain.shipItem();
+    await supplyChain.shipItem(upc);
 
     // Retrieve the just now saved item from blockchain by calling function fetchItem()
     const resultBufferTwo = await supplyChain.fetchItemBufferTwo.call(upc);
@@ -246,7 +246,7 @@ contract("SupplyChain", function (accounts) {
     });
 
     // Mark an item as Sold by calling function receiveItem()
-    await supplyChain.receiveItem();
+    await supplyChain.receiveItem(upc);
 
     // Retrieve the just now saved item from blockchain by calling function fetchItem()
     const resultBufferOne = await supplyChain.fetchItemBufferOne.call(upc);
@@ -267,14 +267,29 @@ contract("SupplyChain", function (accounts) {
     const supplyChain = await SupplyChain.deployed();
 
     // Declare and Initialize a variable for event
+    let eventEmitted = false;
 
     // Watch the emitted event Purchased()
+    const event = supplyChain.Purchased();
+    await event.watch((err, res) => {
+      eventEmitted = true;
+    });
 
     // Mark an item as Sold by calling function purchaseItem()
+    await supplyChain.purchaseItem(upc);
 
     // Retrieve the just now saved item from blockchain by calling function fetchItem()
+    const resultBufferOne = await supplyChain.fetchItemBufferOne.call(upc);
+    const resultBufferTwo = await supplyChain.fetchItemBufferTwo.call(upc);
 
     // Verify the result set
+    assert.equal(
+      resultBufferOne[2],
+      consumerID,
+      "Error: Missing or Invalid ownerID"
+    );
+    assert.equal(resultBufferTwo[5], 7, "Error: Invalid item State");
+    assert.equal(eventEmitted, true, "Invalid event emitted");
   });
 
   // 9th Test
