@@ -1,8 +1,7 @@
-const Web3 = require("web3");
-const Web3WsProvider = require("web3-providers-ws");
-
-// Initialize web3 using WebSocketProvider
-const web3 = new Web3(new Web3WsProvider("ws://localhost:8545"));
+require("dotenv").config();
+const HDWalletProvider = require("@truffle/hdwallet-provider");
+const mnemonic = process.env.MNEMONIC;
+const infuraID = process.env.INFURA_ID;
 
 module.exports = {
   networks: {
