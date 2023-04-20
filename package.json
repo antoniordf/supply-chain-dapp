@@ -12,6 +12,7 @@
     "@truffle/hdwallet-provider": "^2.1.10",
     "dotenv": "^16.0.3",
     "ganache-cli": "^6.12.2",
+    "http-server": "^14.1.1",
     "install": "^0.13.0",
     "npm": "^9.6.5",
     "truffle": "^5.8.2",
