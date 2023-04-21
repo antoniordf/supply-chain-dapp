@@ -177,10 +177,7 @@ App = {
           App.originFarmLatitude,
           App.originFarmLongitude,
           App.productNotes,
-          {
-            from: App.metamaskAccountID,
-            gasPrice: web3.utils.toWei("20", "gwei"),
-          }
+          { from: App.metamaskAccountID }
         );
       })
       .then(function (result) {
