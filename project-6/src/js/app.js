@@ -75,7 +75,7 @@ App = {
     // If no injected web3 instance is detected, fall back to Ganache
     else {
       App.web3Provider = new Web3.providers.HttpProvider(
-        "http://localhost:7545"
+        "http://localhost:9545"
       );
     }
 
@@ -176,7 +176,11 @@ App = {
           App.originFarmInformation,
           App.originFarmLatitude,
           App.originFarmLongitude,
-          App.productNotes
+          App.productNotes,
+          {
+            from: App.metamaskAccountID,
+            gasPrice: web3.utils.toWei("20", "gwei"),
+          }
         );
       })
       .then(function (result) {
