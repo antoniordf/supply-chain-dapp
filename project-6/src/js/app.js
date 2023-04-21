@@ -100,12 +100,12 @@ App = {
 
   initSupplyChain: function () {
     /// Source the truffle compiled smart contracts
-    var jsonSupplyChain = "../../build/contracts/SupplyChain.json";
+    const jsonSupplyChain = "../../build/contracts/SupplyChain.json";
 
     /// JSONfy the smart contracts
     $.getJSON(jsonSupplyChain, function (data) {
       console.log("data", data);
-      var SupplyChainArtifact = data;
+      const SupplyChainArtifact = data;
       App.contracts.SupplyChain = TruffleContract(SupplyChainArtifact);
       App.contracts.SupplyChain.setProvider(App.web3Provider);
 
@@ -126,7 +126,7 @@ App = {
 
     App.getMetaskAccountID();
 
-    var processId = parseInt($(event.target).data("id"));
+    const processId = parseInt($(event.target).data("id"));
     console.log("processId", processId);
 
     switch (processId) {
@@ -165,7 +165,7 @@ App = {
 
   harvestItem: function (event) {
     event.preventDefault();
-    var processId = parseInt($(event.target).data("id"));
+    const processId = parseInt($(event.target).data("id"));
 
     App.contracts.SupplyChain.deployed()
       .then(function (instance) {
@@ -190,7 +190,7 @@ App = {
 
   processItem: function (event) {
     event.preventDefault();
-    var processId = parseInt($(event.target).data("id"));
+    const processId = parseInt($(event.target).data("id"));
 
     App.contracts.SupplyChain.deployed()
       .then(function (instance) {
@@ -207,7 +207,7 @@ App = {
 
   packItem: function (event) {
     event.preventDefault();
-    var processId = parseInt($(event.target).data("id"));
+    const processId = parseInt($(event.target).data("id"));
 
     App.contracts.SupplyChain.deployed()
       .then(function (instance) {
@@ -224,7 +224,7 @@ App = {
 
   sellItem: function (event) {
     event.preventDefault();
-    var processId = parseInt($(event.target).data("id"));
+    const processId = parseInt($(event.target).data("id"));
 
     App.contracts.SupplyChain.deployed()
       .then(function (instance) {
@@ -245,7 +245,7 @@ App = {
 
   buyItem: function (event) {
     event.preventDefault();
-    var processId = parseInt($(event.target).data("id"));
+    const processId = parseInt($(event.target).data("id"));
 
     App.contracts.SupplyChain.deployed()
       .then(function (instance) {
@@ -266,7 +266,7 @@ App = {
 
   shipItem: function (event) {
     event.preventDefault();
-    var processId = parseInt($(event.target).data("id"));
+    const processId = parseInt($(event.target).data("id"));
 
     App.contracts.SupplyChain.deployed()
       .then(function (instance) {
@@ -283,7 +283,7 @@ App = {
 
   receiveItem: function (event) {
     event.preventDefault();
-    var processId = parseInt($(event.target).data("id"));
+    const processId = parseInt($(event.target).data("id"));
 
     App.contracts.SupplyChain.deployed()
       .then(function (instance) {
@@ -300,7 +300,7 @@ App = {
 
   purchaseItem: function (event) {
     event.preventDefault();
-    var processId = parseInt($(event.target).data("id"));
+    const processId = parseInt($(event.target).data("id"));
 
     App.contracts.SupplyChain.deployed()
       .then(function (instance) {
@@ -317,7 +317,7 @@ App = {
 
   fetchItemBufferOne: function () {
     ///   event.preventDefault();
-    ///    var processId = parseInt($(event.target).data('id'));
+    ///    const processId = parseInt($(event.target).data('id'));
     App.upc = $("#upc").val();
     console.log("upc", App.upc);
 
@@ -336,7 +336,7 @@ App = {
 
   fetchItemBufferTwo: function () {
     ///    event.preventDefault();
-    ///    var processId = parseInt($(event.target).data('id'));
+    ///    const processId = parseInt($(event.target).data('id'));
 
     App.contracts.SupplyChain.deployed()
       .then(function (instance) {
@@ -365,7 +365,7 @@ App = {
 
     App.contracts.SupplyChain.deployed()
       .then(function (instance) {
-        var events = instance.allEvents(function (err, log) {
+        const events = instance.allEvents(function (err, log) {
           if (!err)
             $("#ftc-events").append(
               "<li>" + log.event + " - " + log.transactionHash + "</li>"
