@@ -83,7 +83,8 @@ contract SupplyChain is DistributorRole, ConsumerRole {
     }
 
     // Define a modifier that checks if the paid amount is sufficient to cover the price
-    modifier paidEnough(uint _price) {
+    modifier paidEnough(uint _upc) {
+        uint _price = items[_upc].productPrice;
         require(msg.value >= _price, "You have not paid enough");
         _;
     }
@@ -93,7 +94,9 @@ contract SupplyChain is DistributorRole, ConsumerRole {
         _;
         uint _price = items[_upc].productPrice;
         uint amountToReturn = msg.value - _price;
-        payable(items[_upc].consumerID).transfer(amountToReturn);
+        if (amountToReturn > 0) {
+            payable(msg.sender).transfer(amountToReturn);
+        }
     }
 
     // Define a modifier that checks if an item.state of a upc is Harvested
@@ -254,14 +257,13 @@ contract SupplyChain is DistributorRole, ConsumerRole {
     // Use the above defined modifiers to check if the item is available for sale, if the buyer has paid enough,
     // and any excess ether sent is refunded back to the buyer
     function buyItem(
-        uint _upc,
-        uint _amount
+        uint _upc
     )
         public
         payable
         onlyOperational
         forSale(_upc)
-        paidEnough(_amount)
+        paidEnough(msg.value)
         checkValue(_upc)
     {
         // Update the appropriate fields - ownerID, distributorID, itemState
@@ -269,7 +271,7 @@ contract SupplyChain is DistributorRole, ConsumerRole {
         items[_upc].distributorID = msg.sender;
         items[_upc].itemState = State.Sold;
         // Transfer money to farmer
-        payable(items[_upc].originFarmerID).transfer(_amount);
+        payable(items[_upc].originFarmerID).transfer(msg.value);
         // emit the appropriate event
         emit Sold(_upc);
     }
