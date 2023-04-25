@@ -68,7 +68,6 @@ contract SupplyChain is DistributorRole, ConsumerRole {
     event Shipped(uint upc);
     event Received(uint upc);
     event Purchased(uint upc);
-    // event DebugLog(string message);
 
     // Define a modifer that checks to see if msg.sender == owner of the contract
     modifier onlyOwner() {
@@ -263,7 +262,7 @@ contract SupplyChain is DistributorRole, ConsumerRole {
         payable
         onlyOperational
         forSale(_upc)
-        paidEnough(msg.value)
+        paidEnough(_upc)
         checkValue(_upc)
     {
         // Update the appropriate fields - ownerID, distributorID, itemState
@@ -271,7 +270,7 @@ contract SupplyChain is DistributorRole, ConsumerRole {
         items[_upc].distributorID = msg.sender;
         items[_upc].itemState = State.Sold;
         // Transfer money to farmer
-        payable(items[_upc].originFarmerID).transfer(msg.value);
+        payable(items[_upc].originFarmerID).transfer(items[_upc].productPrice);
         // emit the appropriate event
         emit Sold(_upc);
     }
