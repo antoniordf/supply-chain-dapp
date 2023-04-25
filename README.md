@@ -12,7 +12,6 @@ The DApp User Interface when running should look like...
 
 ![truffle test](images/ftc_transaction_history.png)
 
-
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
@@ -27,7 +26,7 @@ Give examples (to be clarified)
 
 ### Installing
 
-> The starter code is written for **Solidity v0.4.24**. At the time of writing, the current Truffle v5 comes with Solidity v0.5 that requires function *mutability* and *visibility* to be specified (please refer to Solidity [documentation](https://docs.soliditylang.org/en/v0.5.0/050-breaking-changes.html) for more details). To use this starter code, please run `npm i -g truffle@4.1.14` to install Truffle v4 with Solidity v0.4.24. 
+> The starter code is written for **Solidity v0.4.24**. At the time of writing, the current Truffle v5 comes with Solidity v0.5 that requires function _mutability_ and _visibility_ to be specified (please refer to Solidity [documentation](https://docs.soliditylang.org/en/v0.5.0/050-breaking-changes.html) for more details). To use this starter code, please run `npm i -g truffle@4.1.14` to install Truffle v4 with Solidity v0.4.24.
 
 A step by step series of examples that tell you have to get a development env running
 
@@ -37,7 +36,7 @@ Clone this repository:
 git clone https://github.com/udacity/nd1309/tree/master/course-5/project-6
 ```
 
-Change directory to ```project-6``` folder and install all requisite npm packages (as listed in ```package.json```):
+Change directory to `project-6` folder and install all requisite npm packages (as listed in `package.json`):
 
 ```
 cd project-6
@@ -64,7 +63,7 @@ Your terminal should look something like this:
 
 ![truffle test](images/truffle_compile.png)
 
-This will create the smart contract artifacts in folder ```build\contracts```.
+This will create the smart contract artifacts in folder `build\contracts`.
 
 Migrate smart contracts to the locally running blockchain, ganache-cli:
 
@@ -94,11 +93,10 @@ npm run dev
 
 ## Built With
 
-* [Ethereum](https://www.ethereum.org/) - Ethereum is a decentralized platform that runs smart contracts
-* [IPFS](https://ipfs.io/) - IPFS is the Distributed Web | A peer-to-peer hypermedia protocol
-to make the web faster, safer, and more open.
-* [Truffle Framework](http://truffleframework.com/) - Truffle is the most popular development framework for Ethereum with a mission to make your life a whole lot easier.
-
+- [Ethereum](https://www.ethereum.org/) - Ethereum is a decentralized platform that runs smart contracts
+- [IPFS](https://ipfs.io/) - IPFS is the Distributed Web | A peer-to-peer hypermedia protocol
+  to make the web faster, safer, and more open.
+- [Truffle Framework](http://truffleframework.com/) - Truffle is the most popular development framework for Ethereum with a mission to make your life a whole lot easier.
 
 ## Authors
 
@@ -106,7 +104,18 @@ See also the list of [contributors](https://github.com/your/project/contributors
 
 ## Acknowledgments
 
-* Solidity
-* Ganache-cli
-* Truffle
-* IPFS
+- Solidity
+- Ganache-cli
+- Truffle
+- IPFS
+
+## Contract Addresses
+
+Sepolia Network
+
+- Migrations.sol: 0x74833e3d9db19c8C524d12591c5D50cFB3113c66
+- FarmerRole.sol: 0xbD7922A199fb0083c62b830fb72F5Dc2dF88BBF4
+- DistributorRole.sol: 0x44fe3004aDffd63fd96Ef840c7397280AFC5954E
+- RetailerRole.sol: 0xBb9878041bCe2f2C19D0Aba06fBc1397ea435518
+- ConsumerRole.sol: 0xabE6647C1F13a79aE6d13C07A9C44709e415A980
+- SupplyChain.sol: 0xbED41E9611cCc30c42ED71478BABa58361b10c28
