@@ -4,6 +4,7 @@ pragma solidity ^0.8.19;
 
 import "../coffeeaccesscontrol/DistributorRole.sol";
 import "../coffeeaccesscontrol/ConsumerRole.sol";
+import "../coffeecore/Ownable.sol";
 
 // Define a contract 'Supplychain'
 contract SupplyChain is DistributorRole, ConsumerRole {

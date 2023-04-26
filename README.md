@@ -109,13 +109,41 @@ See also the list of [contributors](https://github.com/your/project/contributors
 - Truffle
 - IPFS
 
+## Choice of Tech Stack
+
+Truffle:
+Truffle is a popular development framework for Ethereum that simplifies the process of writing, testing, and deploying smart contracts. It provides an environment to compile, deploy, and interact with your smart contracts using JavaScript. Truffle also integrates with popular testing frameworks like Mocha and Chai, making it easier to write comprehensive tests for your smart contracts. In my project, Truffle was used to streamline the development and testing of your smart contracts.
+
+Web3:
+Web3.js is a JavaScript library that allows you to interact with the Ethereum blockchain from a web application. It provides an interface to send transactions, query contract state, and interact with Ethereum nodes. In my project, Web3.js was used to establish a connection between my web application and the Ethereum blockchain, enabling you to send transactions, call smart contract functions, and query the blockchain state.
+
+IPFS:
+The InterPlanetary File System (IPFS) is a distributed file system that enables decentralized storage and sharing of data. It uses a content-addressed, peer-to-peer method of storing and sharing data, making it more resilient to failures and censorship compared to traditional centralized systems. In my project, IPFS was used to store and serve the web application files in a decentralized manner, ensuring that your application remains accessible even if a single server goes down or gets blocked.
+
+Ganache-cli:
+Ganache-cli is a command-line version of Ganache, a local Ethereum blockchain implementation for development and testing purposes. It provides a customizable, personal blockchain that runs entirely in-memory, allowing developers to quickly deploy and test smart contracts without the overhead of a real Ethereum network. Ganache-cli comes with built-in features such as instantly mining transactions, deterministic addresses, and easy access to account private keys. In my project, Ganache-cli was used to create a local Ethereum environment for testing and developing your smart contracts, enabling faster iteration and a controlled environment for experimentation.
+
+## IPFS Deployment
+
+I have deployed the front end code using IPFS by creating a "deploy" folder that stores copies of the src folder (containing app.js) and the index.html and style.css files.
+
+commands:
+cd deploy
+ipfs add -r .
+ipfs pin add <CID>
+
+Content Identifier (CID): QmXNZFuQ2hfKkTo5zYwJcRYMkPmYFBbmAzMvCh393NL7TE
+Full Location: https://ipfs.io/ipfs/QmXNZFuQ2hfKkTo5zYwJcRYMkPmYFBbmAzMvCh393NL7TE/
+
 ## Contract Addresses
 
 Sepolia Network
 
-- Migrations.sol: 0x74833e3d9db19c8C524d12591c5D50cFB3113c66
-- FarmerRole.sol: 0xbD7922A199fb0083c62b830fb72F5Dc2dF88BBF4
-- DistributorRole.sol: 0x44fe3004aDffd63fd96Ef840c7397280AFC5954E
-- RetailerRole.sol: 0xBb9878041bCe2f2C19D0Aba06fBc1397ea435518
-- ConsumerRole.sol: 0xabE6647C1F13a79aE6d13C07A9C44709e415A980
-- SupplyChain.sol: 0xbED41E9611cCc30c42ED71478BABa58361b10c28
+Contract Addresses
+
+- Migrations.sol: 0xd01fBE1CB8f255Ff6d9DB74C1b8BF3aA6175309E
+- FarmerRole.sol: 0x040c9e7a1a116Bd196D6fC3D3C6D74A2C11e3281
+- DistributorRole.sol: 0x30Af7E136B35CA98c3bF00D8D985a11D1BF82461
+- RetailerRole.sol: 0x7A5CdAE3EA0254D0f45a735479c32085cE4809fd
+- ConsumerRole.sol: 0x7A511C5f3e12A60bbc13BF44E58C37B4fAe6846E
+- SupplyChain.sol: 0x324EA83502C14542F1C1d232197DC082C6A58e97 (transaction hash: 0xaebf21dd8e5a63745c10262c08fa677678b4364785f45f7daeae491a6a7590fe)

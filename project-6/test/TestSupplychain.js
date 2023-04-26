@@ -154,7 +154,7 @@ contract("SupplyChain", function (accounts) {
 
     // Mark an item as Sold by calling function buyItem()
     const amount = web3.utils.toWei("1", "ether");
-    const result = await supplyChain.buyItem(upc, amount, {
+    const result = await supplyChain.buyItem(upc, {
       from: distributorID,
       value: amount,
     });
